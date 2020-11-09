@@ -250,7 +250,7 @@ The API will return three error types when requests fail:
 
 
 #### DELETE /questions/{question_id}
-* General: Deletes the book of the given ID if it exists. Returns the id of the deleted book, success value, total books, and book list based on current page number to update the frontend.
+* General: Deletes the question of the given ID if it exists. Returns the id of the deleted question, success value, total question, and question list based on current page number to update the frontend.
 * Sample: ```curl http://127.0.0.1:5000/questions/5 -X DELETE ```
 
 ```
