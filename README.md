@@ -249,8 +249,13 @@ The API will return three error types when requests fail:
 
 
 
+<<<<<<< HEAD
 #### DELETE/questions/{question_id}
 * General: Deletes the question of the given ID if it exists. Returns the id of the deleted question, success value, total questions, and question list based on current page number to update the frontend.
+=======
+#### DELETE /questions/{question_id}
+* General: Deletes the question of the given ID if it exists. Returns the id of the deleted question, success value, total question, and question list based on current page number to update the frontend.
+>>>>>>> 7d61374e284e908e037e8c19f85cf1e114fe35fe
 * Sample: ```curl http://127.0.0.1:5000/questions/5 -X DELETE ```
 
 ```
@@ -332,6 +337,7 @@ The API will return three error types when requests fail:
   "total_questions": 13
 }
 ```
+<<<<<<< HEAD
 
 #### POST/questions
 * General: Creates a new question using the submitted title, author and rating. Returns the id of the created question, success value, total questions, and question list based on current page number to update the frontend..
@@ -369,3 +375,5 @@ The API will return three error types when requests fail:
 }
 ```
 
+=======
+>>>>>>> 7d61374e284e908e037e8c19f85cf1e114fe35fe
