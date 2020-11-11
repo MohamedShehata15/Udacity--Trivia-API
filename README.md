@@ -86,7 +86,7 @@ The API will return three error types when requests fail:
 
 ### Endpoint
 
-#### GET /Categories
+#### GET/categories
 * General: Returns a list of category objects, success value, and total number of categories
 * Sample: ```curl http://127.0.0.1:5000/categories ```
 
@@ -105,7 +105,7 @@ The API will return three error types when requests fail:
 }
 ```
 
-#### GET /Questions
+#### GET/questions
 * General
     * Returns a list of question objects, success value, and total number of questions
     * Results are paginated in groups of 10. Include a request argument to choose page number, starting from 1.
@@ -211,7 +211,7 @@ The API will return three error types when requests fail:
 
 ```
 
-#### GET /Questions
+#### GET/categories/{category_id}/questions
 * General: Get questions by category id.
 * Sample: ```curl http://127.0.0.1:5000/categories/2/questions ```
 
@@ -249,8 +249,8 @@ The API will return three error types when requests fail:
 
 
 
-#### DELETE /questions/{question_id}
-* General: Deletes the book of the given ID if it exists. Returns the id of the deleted book, success value, total books, and book list based on current page number to update the frontend.
+#### DELETE/questions/{question_id}
+* General: Deletes the question of the given ID if it exists. Returns the id of the deleted question, success value, total questions, and question list based on current page number to update the frontend.
 * Sample: ```curl http://127.0.0.1:5000/questions/5 -X DELETE ```
 
 ```
@@ -332,3 +332,40 @@ The API will return three error types when requests fail:
   "total_questions": 13
 }
 ```
+
+#### POST/questions
+* General: Creates a new question using the submitted title, author and rating. Returns the id of the created question, success value, total questions, and question list based on current page number to update the frontend..
+* Sample: ```curl -X POST -H 'Content-Type: application/json' -d '{ "question": "New Question?", "answer": "New Answer", "difficulty": "1", "category": "5"}' http://127.0.0.1:5000/questions```
+
+```
+{
+    "created": 88,
+    "questoins": {
+        "answer": "New Answer",
+        "category": 5,
+        "difficulty": 1,
+        "id": 88,
+        "question": "New Question?"
+    },
+    "success": true,
+    "total_questions": 14
+}
+```
+
+#### POST/quizzes
+* General: Returns the current quizz question.
+* Sample: ```curl -X POST -H 'Content-Type: application/json' -d '{"previous_questions": [10], "quiz_category": {"type": "Sports", "id": "6"}}' http://127.0.0.1:5000/quizzes ```
+
+```
+{
+    "question": {
+        "answer": "Uruguay",
+        "category": 6,
+        "difficulty": 4,
+        "id": 11,
+        "question": "Which country won the first ever soccer World Cup in 1930?"
+    },
+    "success": true
+}
+```
+
