@@ -130,9 +130,7 @@ def create_app(test_config=None):
       question = Question(question = new_question, answer = new_answer, category=new_category, difficulty = new_difficulty)
       question.insert()
 
-      selection = Question.query.order_by(Question.id).all()
-      current_questions = paginate_questions(request, selection)
-      import pdb; pdb.set_trace()
+      current_questions = question.format()
 
       return jsonify({
         'success': True,
@@ -143,6 +141,7 @@ def create_app(test_config=None):
 
     except:
       abort(422)
+
 
   '''
   @TODO: 
@@ -217,11 +216,11 @@ def create_app(test_config=None):
   one question at a time is displayed, the user is allowed to answer
   and shown whether they were correct or not. 
   '''
+
   @app.route('/quizzes', methods=['POST'])
   def play_quiz():
-
     body = request.get_json()
-
+    previous_questions = body.get('previous_questions')
     category = body.get('quiz_category')
 
     if len(category) == 0:
@@ -232,21 +231,24 @@ def create_app(test_config=None):
     else:
         questions = Question.query.filter_by(category=category['id']).all()
 
-    random_questions = []
-    while len(random_questions) < len(questions):
+    def random_questions():
+      random_question = questions[random.randint(0, len(questions) - 1)].format()
+      if random_question['id'] in previous_questions:
+        return random_questions()
+      else:
+        return random_question
 
-      rand_num = random.randint(0, len(questions) - 1)
 
-      if not(questions[rand_num] in random_questions):
-        random_questions.append(questions[rand_num].format())
+    if len(previous_questions) >= len(questions):
+      current_question = None
+    else:
+      current_question = random_questions()
 
-    #print(random_questions)
 
     return jsonify({
         'success': True,
-        'question': random_questions.pop()
+        'question': current_question
     })
-
 
 
   '''
