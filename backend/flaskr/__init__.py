@@ -133,6 +133,9 @@ def create_app(test_config=None):
         new_category = body.get('category', None)
         new_difficulty = body.get('difficulty', None)
 
+        if new_question is None:
+            abort(404)
+
         try:
             question = Question(
                 question=new_question,
@@ -233,6 +236,9 @@ def create_app(test_config=None):
         body = request.get_json()
         previous_questions = body.get('previous_questions')
         category = body.get('quiz_category')
+
+        if category is None:
+            abort(404)
 
         if len(category) == 0:
             abort(400)
