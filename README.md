@@ -382,7 +382,7 @@ The API will return three error types when requests fail:
 
 
 #### POST/quizzes
-* General: Returns the current quizz question.
+* General: Returns the current quiz question.
 * Sample: ```curl -X POST -H 'Content-Type: application/json' -d '{"previous_questions": [10], "quiz_category": {"type": "Sports", "id": "6"}}' http://127.0.0.1:5000/quizzes ```
 
 ```
